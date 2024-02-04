@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import *
-from .serializers import PatientSerializer, RoomSerializer,RoomWithBedSerializer
+from .serializers import PatientSerializer, RoomSerializer,RoomWithBedSerializer,MedicineSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -136,3 +136,24 @@ class DischargePatientAPIView(APIView):
         bed.save()
 
         return response
+    
+class MedicineListView(APIView):
+    def get(self, request, format=None):
+        try:
+            medicines = Medicine.objects.all()
+            serializer = MedicineSerializer(medicines, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({"msg": f"Error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class RoomDetailsView(APIView):
+    def get(self, request, room_number, format=None):
+        try:
+            room = Room.objects.get(room_number=room_number)
+            serializer = RoomWithBedSerializer(room)
+            return Response(serializer.data)
+        except Room.DoesNotExist:
+            return Response({"msg": f"Room with number {room_number} not found."},
+                            status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"msg": f"Error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
