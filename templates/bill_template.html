@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .info {
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed; /* Added to ensure fixed layout */
+            word-wrap: break-word; /* Added to handle long words */
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            word-wrap: break-word; /* Added to handle long words */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Patient Bill</h1>
+    
+    <div class="info">
+        <p><strong>Patient Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+        <p><strong>Admission Date:</strong> {{ patient.admission_date }}</p>
+        <p><strong>Days Admitted:</strong> {{ days_admitted }}</p>
+    </div>
+
+    <h2>Medication Bill</h2>
+    <table>
+        <tr>
+            <th>Medicine</th>
+            <th>Price per day</th>
+        </tr>
+        {% for medication in medications %}
+            <tr>
+                <td>{{ medication.medicine.medicine_name }}</td>
+                <td>{{ medication.medicine.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Room Bill</h2>
+    <table>
+        <tr>
+            <th>Room Number</th>
+            <th>Price per day</th>
+        </tr>
+        <tr>
+            <td>{{ patient.bed.room.room_number }}</td>
+            <td>{{ patient.bed.room.price }}</td>
+        </tr>
+    </table>
+
+    <h2>Nursing Charges</h2>
+    <p>{{ nursing_charges }}</p>
+
+    <div class="total">
+        <h2>Total Bill: {{ total_bill }} rs</h2>
+    </div>
+</body>
+</html>
