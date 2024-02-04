@@ -117,4 +117,23 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 - Django REST framework
 - xhtml2pdf
 
+## Logout Problem in Admin
 
+Replace this lines in ```venv/jazzmin/template/admin/base.html``` from line number 163 to 165
+
+```html
+<a href="{% url 'admin:logout' %}" class="dropdown-item">
+    <i class="fas fa-users mr-2"></i> {% trans 'Log out' %}
+</a>
+```
+
+with
+
+```html
+<form action="{% url 'admin:logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="dropdown-item">
+        <i class="fas fa-users mr-2"></i> {% trans 'Log out' %}
+    </button>
+</form>
+```
