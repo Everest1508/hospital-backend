@@ -43,12 +43,12 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 #### Request JSON Structure:
 
   ```json
-  {
-    "medicine_id": 1,
-    "timing": "Morning",
-    "take": "After meal"
-  }
-```
+    {
+      "medicine_id": 1,
+      "timing": "Morning",
+      "take": "After meal"
+    }
+  ```
 
 ### 7. Get List of Medicines
 
@@ -81,15 +81,15 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 
 #### Response JSON Structure:
 
-```json
-  {
-    "room_number": 101,
-    "floor": 1,
-    "capacity": 2,
-    "price": 50.99,
-    // ... More room details
-  }
-```
+  ```json
+    {
+      "room_number": 101,
+      "floor": 1,
+      "capacity": 2,
+      "price": 50.99,
+      // ... More room details
+    }
+  ```
 ### 9. Health Authentication
 
 - **Endpoint:** `/auth/`
