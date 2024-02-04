@@ -42,8 +42,8 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 
 ## Running the Project
 
-1. Clone the repository: `git clone https://github.com/yourusername/healthcare-management-api.git`
-2. Navigate to the project folder: `cd healthcare-management-api`
+1. Clone the repository: `git clone https://github.com/Everest1508/hospital-backend.git`
+2. Navigate to the project folder: `cd hospital-backend`
 3. Install dependencies: `pip install -r requirements.txt`
 4. Apply database migrations: `python manage.py migrate`
 5. Run the development server: `python manage.py runserver`
