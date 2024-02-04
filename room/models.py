@@ -60,6 +60,7 @@ class Test(models.Model):
     status = models.BooleanField(default=False)
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE,null=True,blank=True)
     bill = models.FloatField(null=True)
+    image = models.ImageField(upload_to="test",null=True,blank=True)
     
     def __str__(self):
         return self.patient.first_name+" "+self.patient.last_name+" Test"
