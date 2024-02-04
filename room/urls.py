@@ -10,5 +10,5 @@ urlpatterns = [
     path('change-medication-status/<int:medication_id>',MedicationStatusAPIView.as_view(),name="change-medication-status"),
     path('get-medicines/',MedicineListView.as_view(),name="get-medicines"),
     path('room-details/<int:room_number>/', RoomDetailsView.as_view(), name='room-details'),
-
+    path('auth/', AuthApiView.as_view(), name='auth-api'),
 ]

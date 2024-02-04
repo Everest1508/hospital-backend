@@ -15,7 +15,9 @@ from django.template.loader import get_template
 from django.template import Context
 from datetime import datetime, time
 from xhtml2pdf import pisa
-
+from django.http import JsonResponse
+from django.views import View
+import requests
 
 class PatientListView(generics.ListAPIView):
     queryset = Patient.objects.all()
@@ -157,3 +159,18 @@ class RoomDetailsView(APIView):
                             status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({"msg": f"Error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+class AuthApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        try:
+            response = requests.get('http://169.254.2.184:8000/read')
+
+            if response.status_code == 200:
+                data = response.json()
+                return JsonResponse(data, status=200)
+            else:
+                return JsonResponse({"msg": "error"}, status=400)
+
+        except Exception as e:
+            return JsonResponse({"msg": "Something Went Wrong"}, status=500)
