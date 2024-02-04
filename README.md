@@ -119,7 +119,7 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 
 ## Logout Problem in Admin
 
-Replace this lines in venv/jazzmin/template/admin/base.html from line number 163 to 165
+Replace this lines in ```venv/jazzmin/template/admin/base.html``` from line number 163 to 165
 
 ```html
 <a href="{% url 'admin:logout' %}" class="dropdown-item">
