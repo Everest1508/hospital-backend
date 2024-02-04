@@ -50,6 +50,32 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
   }
 ```
 
+### 7. Get List of Medicines
+
+- **Endpoint:** `/medicines/`
+- **Method:** `GET`
+- **Description:** Retrieve a list of all medicines.
+
+  #### Response JSON Structure:
+
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "Medicine A",
+      "description": "Description of Medicine A",
+      "price": 10.99
+    },
+    {
+      "id": 2,
+      "name": "Medicine B",
+      "description": "Description of Medicine B",
+      "price": 15.99
+    },
+    // ... More medicines
+  ]
+
+
 ## Running the Project
 
 1. Clone the repository: `git clone https://github.com/Everest1508/hospital-backend.git`
