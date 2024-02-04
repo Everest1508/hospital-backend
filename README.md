@@ -40,10 +40,46 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 - **Method:** `POST`
 - **Description:** Add a medication for a specific patient.
 
+#### Request JSON Structure:
+
+  ```json
+  {
+    "medicine_id": 1,
+    "timing": "Morning",
+    "take": "After meal"
+  }
+```
+
+### 7. Get List of Medicines
+
+- **Endpoint:** `/medicines/`
+- **Method:** `GET`
+- **Description:** Retrieve a list of all medicines.
+
+  #### Response JSON Structure:
+
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "Medicine A",
+      "description": "Description of Medicine A",
+      "price": 10.99
+    },
+    {
+      "id": 2,
+      "name": "Medicine B",
+      "description": "Description of Medicine B",
+      "price": 15.99
+    },
+    // ... More medicines
+  ]
+
+
 ## Running the Project
 
-1. Clone the repository: `git clone https://github.com/yourusername/healthcare-management-api.git`
-2. Navigate to the project folder: `cd healthcare-management-api`
+1. Clone the repository: `git clone https://github.com/Everest1508/hospital-backend.git`
+2. Navigate to the project folder: `cd hospital-backend`
 3. Install dependencies: `pip install -r requirements.txt`
 4. Apply database migrations: `python manage.py migrate`
 5. Run the development server: `python manage.py runserver`
@@ -54,11 +90,4 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 - Django REST framework
 - xhtml2pdf
 
-## Contributing
-
-Contributions are welcome! If you find any issues or have suggestions, please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
