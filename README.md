@@ -27,6 +27,13 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 - **Endpoint:** `/change-room-clean-status/<int:room_number>/`
 - **Method:** `PATCH`
 - **Description:** Toggle the clean status of a room.
+- **Body**
+```json
+{
+  "image":"image"
+}
+```
+
 
 ### 5. Change Medication Status
 
@@ -90,6 +97,7 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
       // ... More room details
     }
   ```
+
 ### 9. Health Authentication
 
 - **Endpoint:** `/auth/`
@@ -101,7 +109,33 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
   ```json
   {
     // Your response data structure
-  }
+  }```
+
+### 10. Get Room Status
+
+- **Endpoint:** `/room-clean-status/<int:room_number>`
+- **Method:** `GET`
+
+  #### Response JSON Structure:
+```json
+{
+  "msg":true
+}
+```
+
+### 11. Get Single Patient
+
+- **Endpoint:** `/patients/<int:id>`
+- **Method:** `GET`
+
+  #### Response JSON Structure:
+
+```json
+
+{
+  "patient details"
+}
+```
 
 ## Running the Project
 
@@ -137,3 +171,4 @@ with
     </button>
 </form>
 ```
+
