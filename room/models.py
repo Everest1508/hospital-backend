@@ -68,6 +68,7 @@ class Test(models.Model):
 class Room(models.Model):
     room_number = models.IntegerField(null=True)
     clean_status = models.BooleanField(default=False)
+    room_img = models.ImageField(upload_to="room",null=True,blank=True)
     price = models.FloatField(null=True)
     
     def __str__(self):

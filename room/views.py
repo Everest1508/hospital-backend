@@ -38,11 +38,18 @@ class RoomWithBedAPIView(APIView):
             return Response({"msg": "Department not found"}, status=status.HTTP_404_NOT_FOUND)
         
 class RoomCleanStatusAPIView(APIView):
-    def patch(self, request, room_number):
-        # Retrieve room
+    def get(self,request,room_number):
         room = get_object_or_404(Room, room_number=room_number)
-
-        # Toggle clean status
+        return Response({"msg":room.clean_status})
+    
+    def patch(self, request, room_number):
+        print(request.data)
+        room = get_object_or_404(Room, room_number=room_number)
+        try:
+            room.room_img = request.data['image']
+            room.save()
+        except:
+            return Response({"msg":"Please Insert Image"},status=status.HTTP_400_BAD_REQUEST)
         room.clean_status = not room.clean_status
         room.save()
 
@@ -174,3 +181,11 @@ class AuthApiView(APIView):
 
         except Exception as e:
             return JsonResponse({"msg": "Something Went Wrong"}, status=500)
+
+class PatientAPIView(APIView):
+    def get(self,request,id):
+        patient = Patient.objects.get(pk=id)
+        if patient is None or patient.discharge is True:
+            return Response({"msg":"Patient not Exist or discharged"},status=status.HTTP_400_BAD_REQUEST)
+        serializer = PatientSerializer(patient)
+        return Response(serializer.data)
