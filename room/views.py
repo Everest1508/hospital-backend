@@ -74,7 +74,7 @@ class AddMedicationAPIView(APIView):
 
         patient = get_object_or_404(Patient, id=patient_id)
 
-        serializer = MedicationSerializer(data=request.data)
+        serializer = MedicineSerializer(data=request.data)
         if serializer.is_valid():
             medicine_id = serializer.validated_data.get('medicine_id')
 
