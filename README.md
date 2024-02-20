@@ -43,7 +43,7 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 
 ### 6. Add Medication for a Patient
 
-- **Endpoint:** `/add-medication/<int:patient_id>`
+- **Endpoint:** `/add-medication/<int:patient_id>/<int:medicine_id>/`
 - **Method:** `POST`
 - **Description:** Add a medication for a specific patient.
 
@@ -51,7 +51,6 @@ Welcome to the Healthcare Management System API. This API is designed to manage 
 
   ```json
     {
-      "medicine_id": 1,
       "timing": "Morning",
       "take": "After meal"
     }
