@@ -70,28 +70,20 @@ class MedicationStatusAPIView(APIView):
                         status=status.HTTP_200_OK)
 
 class AddMedicationAPIView(APIView):
-    def post(self, request, patient_id):
-
-        patient = get_object_or_404(Patient, id=patient_id)
-
-        serializer = MedicineSerializer(data=request.data)
-        if serializer.is_valid():
-            medicine_id = serializer.validated_data.get('medicine_id')
-
-            medicine = get_object_or_404(Medicine, id=medicine_id)
-
-            medication = Medication.objects.create(
-                medicine=medicine,
-                timing=serializer.validated_data.get('timing'),
-                take=serializer.validated_data.get('take'),
-                patient=patient
-            )
-
-            return Response({"msg": "Medication added successfully."},
-                            status=status.HTTP_201_CREATED)
-        else:
-            return Response({"msg": serializer.errors},
-                            status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, patient_id,medicine_id):
+        
+        try:
+            patient = Patient.objects.get(pk=patient_id)
+            medicine = Medicine.objects.get(pk=medicine_id)
+            timing=request.data.get('timing')
+            take=request.data.get('take')
+            
+            medicine = Medication(patient=patient,medicine=medicine,timing=timing,take=take)
+            medicine.save()
+            
+            return Response({'msg':'medication added'})
+        except:
+            return Response({'msg':'An Error Occured'})
 
 
 class DischargePatientAPIView(APIView):
