@@ -14,4 +14,5 @@ urlpatterns = [
     path('room-details/<int:room_number>/', RoomDetailsView.as_view(), name='room-details'),
     path('auth/', AuthApiView.as_view(), name='auth-api'),
     path('add-medicine/<int:patient_id>/<int:medicine_id>/', AddMedicationAPIView.as_view(), name='add-medicine'),
+    path('get-medicine/', MedicineListView.as_view(), name='add-medicine'),
 ]
