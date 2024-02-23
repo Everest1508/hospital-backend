@@ -83,3 +83,7 @@ class Bed(models.Model):
     
     def __str__(self):
         return "Bed No. "+str(self.bed_no) +"-"+ ("Occupied" if self.status else "Vacant")
+
+class PatientBill(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    bill = models.FileField(upload_to="bill")

@@ -18,6 +18,7 @@ from xhtml2pdf import pisa
 from django.http import JsonResponse
 from django.views import View
 import requests
+from .models import PatientBill
 
 class PatientListView(generics.ListAPIView):
     queryset = Patient.objects.all()
@@ -121,22 +122,23 @@ class DischargePatientAPIView(APIView):
         }
         html_content = template.render(context, request)
 
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment; filename="{patient.first_name}_{patient.last_name}_bill.pdf"'
-        pisa_status = pisa.CreatePDF(html_content, dest=response)
+        filename = f"{patient.first_name}_{patient.last_name}_bill.pdf"
+        file_path = f"media/bill/{filename}"
+        with open(file_path, 'w+b') as pdf_file:
+            pisa_status = pisa.CreatePDF(html_content, dest=pdf_file)
 
-        if pisa_status.err:
-            return JsonResponse({"msg": "Error generating PDF."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            if pisa_status.err:
+                return JsonResponse({"msg": "Error generating PDF."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+        # Update patient and bed status
         patient.discharge = True
         patient.save()
-
         bed = patient.bed
         bed.status = False
         bed.patient = None
         bed.save()
 
-        return response
+        return JsonResponse({'msg': f"http://127.0.0.1:8000/{file_path}"}, status=status.HTTP_200_OK)
     
 class MedicineListView(APIView):
     def get(self, request, format=None):
